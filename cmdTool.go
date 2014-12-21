@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/nishikawasasaki/gokuyamaClient"
+	"os"
 )
 
 var (
@@ -45,9 +46,22 @@ func setCommand(args []string) {
 
 }
 
+func showHelp() {
+	msg := `Usage:
+    set -- Set key and value.
+    get -- Get value from the key`
+	fmt.Println(msg)
+}
+
 func main() {
 
 	flag.Parse()
+
+	if len(flag.Args()) == 0 {
+		// show help
+		showHelp()
+		os.Exit(0)
+	}
 
 	commandName := &flag.Args()[0]
 	// fmt.Println(commandName)
